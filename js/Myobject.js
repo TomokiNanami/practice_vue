@@ -38,3 +38,5 @@ ob2.writeP()
 
 alert(ob.total())
 
+alert(ob.total())
+
