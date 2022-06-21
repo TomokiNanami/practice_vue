@@ -9,13 +9,43 @@
     <body>
         <h1>Vue3</h1>
         <div id="app">
-            {{message}}
+            <!-- .toUpperCase()で文字をすべて大文字にできる -->
+            <!-- <p>{{message.toUpperCase()}}</p> -->
+            <p>{{message + "[" + new Date().toLocaleString() + "]"}}</p>
+            <hr>
+            <!-- 「Stop」ボタン設置、クリック時の処理はdoAction()関数 -->
+            <button onclick="doAction()">Stop</button>
         </div>
 
         <script>
+            let timer = null
+
+            // count処理をストップさせる関数(clearInterval)の処理
+            function doAction() {
+                clearInterval(timer)
+            }
+
             const appdata = {
+                // data()に用意するものは画面に表示するものだけ
                 data() {
-                    return{message: 'Hello Vue!'}
+                    return{
+                        message: ''
+                    }
+                },
+                created() {
+                    this.message = 'Hello Vue!'
+                    this.count = 0
+                },
+                mounted(){
+                    // setInterval(関数, ミリ秒)
+                    // setInterval() -> 一定時間で処理を繰り返すjs関数
+                    timer = setInterval(
+                        () => {
+                            this.count++
+                            this.message = 'count: ' + this.count
+                        },
+                        1000
+                    )
                 }
             }
             <!-- Vue.createApp(関数).mount('#divのid?') -->
