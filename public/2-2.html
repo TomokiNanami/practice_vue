@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<!-- v-htmlについて, リストの使い方, テンプレートリテラル、プレースホルダー, 三項演算子で条件分岐 -->
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <title>2-2</title>
+        <!-- vue -> Vue2用　vue@next ->Vue3用 -->
+        <script src="https://unpkg.com/vue@next"></script>
+    </head>
+    <body>
+        <h1>Vue3</h1>
+        <div id="app">
+            <div v-html="message"></div>
+            <!-- v-htmlを使うことによってScript側にhtmlのソースを書いても”文字”ではなくソースコードとして認識してくれる。 -->
+            <!-- <div>{{message}}</div> -->
+            <!-- 上記記法だとScript側で書いたhtml文を”文字”として認識してしまう為、使えない。 -->
+        </div>
+
+        <script>
+            const list = ['One', 'Two', 'Three']
+            const appdata = {
+                data() {
+                    return{
+                        message:
+                            // 「｀」-> Shift + @　※普段使わないのでメモ
+                            // ｀ ~~~ ｀ -> バックティックからバックティックまでの間をテンプレートリテラル
+                            // ${変数名、リストなど} -> プレースホルダー
+                            `<ul>
+                                <li>${list[0]}</li>
+                                <li>${list[1]}</li>
+                                <li>${list[2]}</li>
+                            </ul>`
+                    }
+                }
+            }
+
+            let app = Vue.createApp(appdata)
+            app.mount('#app')
+        </script>
+    </body>
+</html>
